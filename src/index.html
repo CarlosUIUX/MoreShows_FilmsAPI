@@ -10,19 +10,46 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap');
 
-        *{
+        * {
             font-family: 'Golos Text', sans-serif !important;
             scroll-behavior: smooth;
         }
+
         #fondo {
             position: relative;
             height: 100%;
-            background: linear-gradient(rgba(15, 23, 42,.8), rgba(15, 23, 42,1)), url('https://images.pexels.com/photos/274937/pexels-photo-274937.jpeg');
+            background: linear-gradient(rgba(15, 23, 42, .8), rgba(15, 23, 42, 1)), url('https://images.pexels.com/photos/274937/pexels-photo-274937.jpeg');
             background-size: cover;
             background-position: center;
         }
+
         *:focus {
             outline: none;
+        }
+
+        @keyframes loader-rotate {
+            0% {
+                transform: rotate(0);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loader {
+            border-right-color: transparent;
+            animation: loader-rotate 1s linear infinite;
+        }
+
+        .cursor-pointer{
+            transition: 300ms;
+        }
+
+        .cursor-pointer:hover{
+            cursor: pointer;
+            transition: 300ms;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
         }
     </style>
 </head>
@@ -30,18 +57,61 @@
 <body class="bg-slate-900">
     <div id="fondo">
         <nav class="container mx-auto flex justify-between py-5 px-3">
-            <a href="index.html" class="text-yellow-400 text-xl font-semibold">More<span class="text-white text-xl">Shows+</span></a>
+            <a href="index.html" class="text-yellow-400 text-xl font-semibold">More<span
+                    class="text-white text-xl">Shows+</span></a>
             <a href="#"></a>
         </nav>
-        <div class="w-full lg:w-1/2 md:w-full mx-auto text-center px-5 lg:px-16 md:px-8 pb-16 lg:pb-48 md:pb-32 pt-8 lg:pt-24 md:pt-16">
-            <h1 class="text-xl lg:text-3xl md:text-2xl mb-8 text-white font-bold">Millions of movies, shows and TV series are waiting for you</h1>
+        <div
+            class="w-full lg:w-1/2 md:w-full mx-auto text-center px-5 lg:px-16 md:px-8 pb-16 lg:pb-48 md:pb-32 pt-8 lg:pt-24 md:pt-16">
+            <h1 class="text-xl lg:text-3xl md:text-2xl mb-8 text-white font-bold">Millions of movies, shows and TV
+                series are waiting for you</h1>
             <div class="relative tex-center">
-                <input type="search" id="titulo" class="block w-full p-4 text-sm border text-slate-300 border-slate-500 focus:text-white focus:border-slate-400 rounded-full bg-slate-700 " placeholder="Search" required>
-                <button id="buscar" class="text-white absolute right-2.5 bottom-2.5 duration-300 bg-yellow-400 hover:bg-yellow-500 font-medium rounded-full text-sm px-2 py-2"><svg aria-hidden="true" class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
+                <input type="search" id="titulo"
+                    class="block w-full p-4 text-sm border text-slate-300 border-slate-500 focus:text-white focus:border-slate-400 rounded-full bg-slate-700 "
+                    placeholder="Search" required>
+                <button id="buscar"
+                    class="text-white absolute right-2.5 bottom-2.5 duration-300 bg-yellow-400 hover:bg-yellow-500 font-medium rounded-full text-sm px-2 py-2"><svg
+                        aria-hidden="true" class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg></button>
             </div>
         </div>
     </div>
     <main class="p-3 lg:p-0 md:p-0" id="main-content">
+        <div class='container mx-auto grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3 gap-5 relative bottom-5 lg:bottom-32 md:bottom-16 text-white'>
+            <div class="hover:shadow-lg cursor-pointer" onclick="consultarPelicula('avengers: endgame')">
+                <img class="rounded-lg w-full" src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg">
+            </div>
+            <div class="hover:shadow-lg cursor-pointer" onclick="consultarPelicula('inglorious bastards')">
+                <img class="rounded-lg w-full" src="https://m.media-amazon.com/images/M/MV5BOTJiNDEzOWYtMTVjOC00ZjlmLWE0NGMtZmE1OWVmZDQ2OWJhXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg">
+            </div>
+            <div class="hover:shadow-lg cursor-pointer" onclick="consultarPelicula('parasite')">
+                <img class="rounded-lg w-full" src="https://m.media-amazon.com/images/M/MV5BYWZjMjk3ZTItODQ2ZC00NTY5LWE0ZDYtZTI3MjcwN2Q5NTVkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_SX300.jpg">
+            </div>
+            <div class="hover:shadow-lg cursor-pointer" onclick="consultarPelicula('the wolf of wall street')">
+                <img class="rounded-lg w-full" src="https://m.media-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_SX300.jpg">
+            </div>
+            <div class="hover:shadow-lg cursor-pointer" onclick="consultarPelicula('house of the dragon')">
+                <img class="rounded-lg w-full" src="https://m.media-amazon.com/images/M/MV5BZjBiOGIyY2YtOTA3OC00YzY1LThkYjktMGRkYTNhNTExY2I2XkEyXkFqcGdeQXVyMTEyMjM2NDc2._V1_SX300.jpg">
+            </div>
+            <div class="hover:shadow-lg cursor-pointer" onclick="consultarPelicula('about time  ')">
+                <img class="rounded-lg w-full" src="https://m.media-amazon.com/images/M/MV5BMTA1ODUzMDA3NzFeQTJeQWpwZ15BbWU3MDgxMTYxNTk@._V1_SX300.jpg">
+            </div>
+            <div class="hover:shadow-lg cursor-pointer" onclick="consultarPelicula('star wars')">
+                <img class="rounded-lg w-full" src="https://m.media-amazon.com/images/M/MV5BOTA5NjhiOTAtZWM0ZC00MWNhLThiMzEtZDFkOTk2OTU1ZDJkXkEyXkFqcGdeQXVyMTA4NDI1NTQx._V1_SX300.jpg">
+            </div>
+            <div class="hover:shadow-lg cursor-pointer" onclick="consultarPelicula('the simpsons')">
+                <img class="rounded-lg w-full" src="https://m.media-amazon.com/images/M/MV5BYjFkMTlkYWUtZWFhNy00M2FmLThiOTYtYTRiYjVlZWYxNmJkXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg">
+            </div>
+            <div class="hover:shadow-lg cursor-pointer" onclick="consultarPelicula('back to the future')">
+                <img class="rounded-lg w-full" src="https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg">
+            </div>
+            <div class="hover:shadow-lg cursor-pointer" onclick="consultarPelicula('spider-man 3')">
+                <img class="rounded-lg w-full" src="https://m.media-amazon.com/images/M/MV5BYTk3MDljOWQtNGI2My00OTEzLTlhYjQtOTQ4ODM2MzUwY2IwXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg">
+            </div>
+        </div>
     </main>
     <script src="app.js"></script>
 </body>

@@ -1,14 +1,18 @@
-document.addEventListener("DOMContentLoaded", eventos);
+document.addEventListener('DOMContentLoaded', eventos);
 
 function eventos() {
-    document.getElementById("buscar").addEventListener("click", consultarPelicula);
+    const buscar = document.getElementById("buscar");
+    buscar.addEventListener("click", peticionPelicula)
 }
 
-function consultarPelicula() {
-    const titulo = document.getElementById("titulo");
-    const main = document.getElementById("main-content");
+function peticionPelicula () {
+    let tituloUsuario = document.getElementById("titulo").value;
+    consultarPelicula(tituloUsuario);
+}
 
-    fetch(`http://www.omdbapi.com/?apikey=97ba8b09&t=${titulo.value}&plot=full`)
+function consultarPelicula(peliculaUsuario) {
+    const main = document.getElementById("main-content");
+    fetch(`http://www.omdbapi.com/?apikey=97ba8b09&t=${peliculaUsuario}&plot=full`)
     .then(response => response.json())
     .then(pelicula => {
 
@@ -19,13 +23,29 @@ function consultarPelicula() {
         generosLabels += `<small class='px-1.5 py-0.5 bg-yellow-400/20 border text-yellow-400 border-yellow-400 rounded-full uppercase text-xs tracking-wide mr-2'>${genero}</small>`;
     });
 
-    let rotten = pelicula.Ratings[1].Value;
-    let metascore = pelicula.Metascore;
-    let imdb = pelicula.imdbRating;
+    let rotten, metascore, imdb;
+
+    if(typeof pelicula.Ratings[1] !== 'undefined'){
+        rotten = pelicula.Ratings[1].value;
+    }else{
+        rotten = "-";
+    }
+
+    if(typeof pelicula.Metascore !== 'undefined'){
+        metascore = pelicula.Metascore;
+    }else{
+        metascore = "-";
+    }
+
+    if(typeof pelicula.imdbRating !== 'undefined'){
+        imdb = pelicula.imdbRating;
+    }else{
+        imdb = "-";
+    }
 
     main.innerHTML = `
     <div class="container grid grid-cols-4 gap-0 lg:gap-12 md:gap-8 mx-auto bg-slate-800 relative bottom-5 lg:bottom-32 md:bottom-16 rounded-lg p-8 lg:p-16 text-white">
-        <img class="hidden lg:block md:block" src="${pelicula.Poster}" alt="Poster for ${pelicula.title}">
+        <img class="hidden lg:block md:block rounded-lg" src="${pelicula.Poster}" alt="Poster for ${pelicula.title}">
         <div class="col-span-4 lg:col-span-3 md:col-span-3 py-0 lg:py-5 md:py-0">
             <div class="flex flex-wrap">
                 ${generosLabels}
@@ -70,10 +90,4 @@ function consultarPelicula() {
     </div>
         `;
     })
-    .catch(
-        main.innerHTML = `
-        <div class="flex justify-center container gap-0 lg:gap-12 md:gap-8 mx-auto bg-slate-800 relative bottom-5 lg:bottom-32 md:bottom-16 rounded-lg p-8 lg:p-16 text-white">
-            <p class='text-white text-3xl text-center'>Sin resultados 😢</p>
-        </div>`
-    );
 }
